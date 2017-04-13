@@ -5,16 +5,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
     Button butmain;
+    EditText editName,editTel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         butmain=(Button)findViewById(R.id.but_main);
+        editName=(EditText) findViewById(R.id.edit_name);
+        editTel=(EditText) findViewById(R.id.edit_tel);
         butmain.setOnClickListener(butMainHandler);
     }
 
@@ -22,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent=new Intent(getApplicationContext(), SecondActivity.class);
+            String name=editName.getText().toString();
+            String tel=editTel.getText().toString();
+            intent.putExtra("name",name);//첫번째는 값의 이름이며, 두번째는 실제 값의 내용이다. 즉 변수 개념으로 생각하면 된다.
+            intent.putExtra("tel",tel);
             startActivity(intent);
         }
     };
